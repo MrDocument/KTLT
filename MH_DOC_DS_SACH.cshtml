@@ -1,0 +1,86 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = "_layout1.cshtml";
+    if (Session["USER"] == null)
+    {
+        Response.Redirect("~/UI/MH_DANGNHAP.cshtml");
+    }
+
+    string keyword = string.Empty;
+
+    List<BOOK> result = new List<BOOK>();
+
+    if (IsPost)
+    {
+        keyword = Request["keyword"];
+
+    }
+    result = ser_Book.readListBooks(keyword);
+
+}
+
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+
+
+<div id="BODY">
+    <a href="~/UI/MH_GHISACH.cshtml">Add New Book</a>
+    <form action="~/UI/MH_DOC_DS_SACH.cshtml" method="post">
+        <p>
+            <label for="text">Keyword: </label><br />
+            <input type="text" name="keyword" value="" />
+        </p>
+
+        <p>
+
+            <input type="submit" value="Search" />
+        </p>
+        @if (result.Count != 0)
+        {
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Author</th>
+                    <th>Publishing Year</th>
+                    <th>Actions</th>
+                </tr>
+                @foreach (var books in result)
+                {
+                    <tr>
+                        <td>@books.ID</td>
+                        <td>@books.Name</td>
+                        <td>@books.Price</td>
+                        <td>@books.Author</td>
+                        <td>@books.PublishingYear</td>
+                        <td>
+                            <a href="~/UI/MH_SUA_SACH.cshtml?id=@books.ID">Update</a>
+
+                            <a href="~/UI/MH_XOA_SACH.cshtml?id=@books.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </form>
+</div>
+

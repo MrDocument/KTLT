@@ -1,0 +1,46 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    POLYGON pol;
+
+    if (IsPost)
+    {
+        var filePath = Request["filepath"];
+        pol = _Polygon.readPolygon(filePath);
+
+
+        var result = _Polygon.PolygonPerimeter(pol);
+        totalMessage = $"Result of polygon perimeter is {result}";
+
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/MH_DOC_DAGIAC.cshtml" method="post">
+            <p>
+                <label for="text">Polygon File Path: </label><br />
+                <input type="text" name="filepath" value="" />
+            </p>
+            
+            <p>
+
+                <input type="submit" value="Read" />
+            </p>
+        </form>
+    </div>
+    @totalMessage
+</body>
+</html>

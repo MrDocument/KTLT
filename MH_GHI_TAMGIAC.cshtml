@@ -1,0 +1,70 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    TRIANGLE tg;
+
+    if (IsPost)
+    {     
+        
+        tg.A.X = int.Parse(Request["x1"]);
+        tg.A.Y = int.Parse(Request["y1"]);
+        tg.B.X = int.Parse(Request["x2"]);
+        tg.B.Y = int.Parse(Request["y2"]);
+        tg.C.X = int.Parse(Request["x3"]);
+        tg.C.Y = int.Parse(Request["y3"]);
+
+        ser_Triangle.writeTriangle(tg);
+
+        totalMessage = "Writed success!!";
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/UI/MH_GHI_TAMGIAC.cshtml" method="post">            
+            <p>
+                <label for="text">X 1: </label><br />
+                <input type="text" name="x1" value="" />
+            </p>
+            <p>
+                <label for="text">Y 1: </label><br />
+                <input type="text" name="y1" value="" />
+            </p>
+            <p>
+                <label for="text">X 2: </label><br />
+                <input type="text" name="x2" value="" />
+            </p>
+            <p>
+                <label for="text">Y 2: </label><br />
+                <input type="text" name="y2" value="" />
+            </p>
+            <p>
+                <label for="text">X 3: </label><br />
+                <input type="text" name="x3" value="" />
+            </p>
+            <p>
+                <label for="text">Y 3: </label><br />
+                <input type="text" name="y3" value="" />
+            </p>
+
+            <p>
+
+                <input type="submit" value="Write" />
+            </p>
+        </form>
+    </div>
+    @totalMessage
+</body>
+</html>

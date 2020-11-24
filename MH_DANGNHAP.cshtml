@@ -1,0 +1,58 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    
+
+
+    if (IsPost)
+    {
+        var username = Request["username"];
+        var password = Request["password"];
+
+        USER user = IUSERS.Login(username, password);
+
+        if(user.ID == 0)
+        {
+            totalMessage = "Xin vui lòng nhập đúng Account";
+        }
+        else
+        {
+            totalMessage = $"Chào mừng User {user.ID}";
+            Session["USER"] = user;
+            Response.Redirect("~/UI/MH_DOC_DS_SACH.cshtml");
+        }
+
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    
+    <div>
+        <form action="~/UI/MH_DANGNHAP.cshtml" method="post">
+            <p>
+                <label form="text">USERNAME:</label><br />
+                <input type="text" name="username" value="" />
+            </p>
+            <p>
+                <label form="text">PASSWORD:</label><br />
+                <input type="password" name="password" value="" />
+            </p><br />
+            <input type="submit" value="Login" />
+            Nếu chưa có tài khoản, Nhấp vào đây để
+            Đăng ký <a href="~/UI/MH_DANGKY.cshtml">Click here</a>
+        </form>
+        @totalMessage
+    </div>
+    
+</body>
+</html>

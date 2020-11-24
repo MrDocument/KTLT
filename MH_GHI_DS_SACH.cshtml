@@ -1,0 +1,66 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+    string totalMessage = string.Empty;
+
+    BOOK b;
+
+    if (IsPost)
+    {
+        
+
+        b.ID = int.Parse(Request["id"]);
+        b.Name = Request["name"];
+        b.Price = int.Parse(Request["price"]);
+        b.Author = Request["author"];
+        b.PublishingYear = int.Parse(Request["year"]);
+
+        ser_Book.writeBook(b);
+
+        totalMessage = "Writed Success!!!";
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/UI/MH_GHI_DS_SACH.cshtml" method="post">
+            <p>
+                <label form="text">File Path In:</label><br />
+                <input type="text" name="filepath" value="" />
+            </p>
+            <p>
+                <label form="text">ID:</label><br />
+                <input type="text" name="id" value="" />
+            </p>
+            <p>
+                <label form="text">Book's Name:</label><br />
+                <input type="text" name="name" value="" />
+            </p>
+            <p>
+                <label form="text">Price:</label><br />
+                <input type="text" name="price" value="" />
+            </p>
+            <p>
+                <label form="text">Author:</label><br />
+                <input type="text" name="author" value="" />
+            </p>
+            <p>
+                <label form="text">Publishing Year:</label><br />
+                <input type="text" name="year" value="" />
+            </p>
+            <p>
+                <input type="submit" value="Write" />
+            </p>
+        </form>
+        @totalMessage
+    </div>
+</body>
+</html>

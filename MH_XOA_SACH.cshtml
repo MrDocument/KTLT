@@ -1,0 +1,40 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    var id = int.Parse(Request["id"]);
+
+    if (IsPost)
+    {
+
+        ser_Book.deleteBook(id);
+
+        Response.Redirect("~/UI/MH_DOC_DS_SACH.cshtml");
+    }
+    else
+    {
+        totalMessage = $"Do you want to delete the book with this ID {id} or not?";
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+    <div>
+        @totalMessage
+        <form action="~/UI/MH_XOA_SACH.cshtml?id=@id" method="post">
+            <p>
+                <input type="submit" value="Yes" />
+            </p>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    FRACTION frac1, frac2;
+
+    if (IsPost)
+    {
+        
+        frac1.numerator = int.Parse(Request["num1"]);
+        frac1.denomirator = int.Parse(Request["denomi1"]);
+         
+        frac2.numerator = int.Parse(Request["num2"]);
+        frac2.denomirator = int.Parse(Request["denomi2"]);
+
+        FRACTION kq = ser_Fraction.AddTwoFraction(frac1, frac2);
+
+        totalMessage ="The result is " + $"{kq.numerator}/{kq.denomirator}";
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/MH_TINHTONGPHANSO.cshtml" method="post">
+            <p>
+                <label for="text">Numeric 1 Input: </label><br />
+                <input type="text" name="num1" value="" />
+            </p>
+            <p>
+                <label for="text">Denomirator 1 Input: </label><br />
+                <input type="text" name="denomi1" value="" />
+            </p>
+            <p>
+                <label for="text">Numeric 2 Input: </label><br />
+                <input type="text" name="num2" value="" />
+            </p>
+            <p>
+                <label for="text">Denomirator 2 Input: </label><br />
+                <input type="text" name="denomi2" value="" />
+            </p>
+            <p>
+
+                <input type="submit" value="Calculate" />
+            </p>
+        </form>
+    </div>
+    @totalMessage
+</body>
+</html>

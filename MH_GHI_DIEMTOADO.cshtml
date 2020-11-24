@@ -1,0 +1,59 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    POINT A;
+
+    if (IsPost)
+    {
+        var filePath = Request["filepath"];
+
+
+        A.X = int.Parse(Request["x"]);
+        A.Y = int.Parse(Request["y"]);
+
+
+
+        ser_Point.writePoint(A, filePath);
+
+        totalMessage = "Writed success!!";
+
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/MH_GHI_DIEMTOADO.cshtml" method="post">
+            <p>
+                <label for="text">File Path: </label><br />
+                <input type="text" name="filepath" value="" />
+            </p>
+            <p>
+                <label for="text">X: </label><br />
+                <input type="text" name="x" value="" />
+            </p>
+            <p>
+                <label for="text">Y: </label><br />
+                <input type="text" name="y" value="" />
+            </p>
+            
+            <p>
+
+                <input type="submit" value="Write" />
+            </p>
+        </form>
+    </div>
+    @totalMessage
+</body>
+</html>

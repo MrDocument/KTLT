@@ -1,0 +1,42 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;    
+
+    if (IsPost)
+    {
+        var filePath = Request["filepath"];
+        
+        var result = ser_Book.readBook(filePath);
+
+        totalMessage = $"The book name is {result.Name}";
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/MH_DOC_SACH.cshtml" method="post">
+            <p>
+                <label for="text">Polygon File Path: </label><br />
+                <input type="text" name="filepath" value="" />
+            </p>
+            
+            <p>
+
+                <input type="submit" value="Read" />
+            </p>
+        </form>
+    </div>
+    @totalMessage
+</body>
+</html>

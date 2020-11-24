@@ -1,0 +1,61 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+    POINT A,B;
+
+    if (IsPost)
+    {
+
+        A.X = int.Parse(Request["x1"]);
+        A.Y = int.Parse(Request["y1"]);
+
+        B.X = int.Parse(Request["x2"]);
+        B.Y = int.Parse(Request["y2"]);
+
+        var kq = ser_Point.Distance2Point(A, B);
+
+        totalMessage = "Distance between 2 point is"  + kq.ToString();
+
+    }
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="~/MH_TINHKHOANGCACHDIEM.cshtml" method="post">
+            <p>
+                <label for="text">X1: </label><br />
+                <input type="text" name="x1" value="" />
+            </p>
+            <p>
+                <label for="text">Y1: </label><br />
+                <input type="text" name="y1" value="" />
+            </p>
+            <p>
+                <label for="text">X2: </label><br />
+                <input type="text" name="x2" value="" />
+            </p>
+            <p>
+                <label for="text">Y2: </label><br />
+                <input type="text" name="y2" value="" />
+            </p>
+            <p>
+
+                <input type="submit" value="Calculate" />
+            </p>
+        </form>
+    </div>
+    @totalMessage
+</body>
+</html>

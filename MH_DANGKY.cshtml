@@ -1,0 +1,49 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = null;
+
+    string totalMessage = string.Empty;
+
+
+
+
+    if (IsPost)
+    {
+        var username = Request["username"];
+        var password = Request["password"];
+
+        IUSERS.Register(username, password);
+
+        Response.Redirect("~/UI/MH_DANGNHAP.cshtml");
+
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    
+    <div>
+        <form action="~/UI/MH_DANGKY.cshtml" method="post">
+            <p>
+                <label form="text">USERNAME:</label><br />
+                <input type="text" name="username" value="" />
+            </p>
+            <p>
+                <label form="text">PASSWORD:</label><br />
+                <input type="password" name="password" value="" />
+            </p><br />
+            <p>
+                <input type="submit" value="Register" />
+            </p>
+        </form>
+        @totalMessage
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@using OnTap_KTLT
+@{
+    Layout = "_layout1.cshtml";
+    string totalMessage = string.Empty;
+
+    var id = int.Parse(Request["id"]);
+
+
+    BOOK book = new BOOK();
+
+    if (IsPost)
+    {
+        BOOK b;
+        b.ID = int.Parse(Request["id"]);
+        b.Name = Request["name"];
+        b.Price = int.Parse(Request["price"]);
+        b.Author = Request["author"];
+        b.PublishingYear = int.Parse(Request["year"]);
+
+        ser_Book.updateBook(b);
+
+        Response.Redirect("~/UI/MH_DOC_DS_SACH.cshtml");
+    }
+    else
+    {
+        book = ser_Book.readBookUpdate(id);
+        if (book.ID == 0)
+        {
+            totalMessage = "No result!";
+        }
+        else
+        {
+            totalMessage = $"Do you want to update the book with this ID {id} or not?";
+        }
+
+    }
+
+
+}
+
+
+
+<div>
+    @totalMessage
+    <form action="~/UI/MH_SUA_SACH.cshtml?id=@id" method="post">
+        <p>
+            <label form="text">ID:</label><br />
+            <input type="text" name="id" value="@book.ID" />
+        </p>
+        <p>
+            <label form="text">Book's Name:</label><br />
+            <input type="text" name="name" value="@book.Name" />
+        </p>
+        <p>
+            <label form="text">Price:</label><br />
+            <input type="text" name="price" value="@book.Price" />
+        </p>
+        <p>
+            <label form="text">Author:</label><br />
+            <input type="text" name="author" value="@book.Author" />
+        </p>
+        <p>
+            <label form="text">Publishing Year:</label><br />
+            <input type="text" name="year" value="@book.PublishingYear" />
+        </p>
+        <p>
+            <input type="submit" value="Update" />
+        </p>
+    </form>
+
+</div>
+
